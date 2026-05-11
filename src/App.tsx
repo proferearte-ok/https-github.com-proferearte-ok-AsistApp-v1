@@ -122,38 +122,62 @@ const BottomNavBar = ({ currentScreen, setScreen }: { currentScreen: Screen, set
 );
 
 // --- Screens ---
+const WelcomeScreen = ({ onLogin }: { onLogin: (email: string, pass: string) => void }) => {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
 
-const WelcomeScreen = ({ onLogin }: { onLogin: () => void }) => (
-  <div className="min-h-screen flex flex-col md:flex-row bg-surface">
-    <div className="hidden md:flex md:w-1/2 bg-primary-container items-center justify-center p-12 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-64 h-64 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 opacity-20" />
-      <div className="relative z-10 text-center max-w-md">
-        <h1 className="font-display text-5xl font-bold text-on-primary-container mb-6">AsistApp</h1>
-        <p className="text-xl text-on-primary-container/90 mb-8 leading-relaxed">
-          Diseñado para transformar la gestión del aula en una experiencia fluida.
-        </p>
-        <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFW9pgqS3OUINPdatt2CW1AU5n1ZLud4y402-suq1tg-bcYiq4MJc7QnI_ECzrEeFhk5N6hk9_Ns7cCt0lPcA5wsu7nEycdD2DLx81ywemdchXk60PQkQQxb3xO2YuFYtvNtBKY4-nz6-_Uep8v5n8fYO12MBuCoWDnEzoVwVaLBwyzXfo8VhO8Ld4-mIXKImYkiC6KhEitfBLIOxsvQMRMjdMRC3hf0J2myxiR64BiSV4ljRcjyQJBL7sDEvMURwUj54Ds5e7slob" alt="Teacher" className="w-full h-auto aspect-video object-cover" />
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-surface">
+      <div className="hidden md:flex md:w-1/2 bg-primary-container items-center justify-center p-12 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 opacity-20" />
+        <div className="relative z-10 text-center max-w-md">
+          <h1 className="font-display text-5xl font-bold text-on-primary-container mb-6">AsistApp</h1>
+          <p className="text-xl text-on-primary-container/90 mb-8 leading-relaxed">
+            Diseñado para transformar la gestión del aula en una experiencia fluida.
+          </p>
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFW9pgqS3OUINPdatt2CW1AU5n1ZLud4y402-suq1tg-bcYiq4MJc7QnI_ECzrEeFhk5N6hk9_Ns7cCt0lPcA5wsu7nEycdD2DLx81ywemdchXk60PQkQQxb3xO2YuFYtvNtBKY4-nz6-_Uep8v5n8fYO12MBuCoWDnEzoVwVaLBwyzXfo8VhO8Ld4-mIXKImYkiC6KhEitfBLIOxsvQMRMjdMRC3hf0J2myxiR64BiSV4ljRcjyQJBL7sDEvMURwUj54Ds5e7slob" alt="Teacher" className="w-full h-auto aspect-video object-cover" />
+          </div>
         </div>
       </div>
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
+        <div className="w-full max-w-sm flex flex-col gap-8">
+          <div className="flex justify-center">
+             <img src="https://lh3.googleusercontent.com/aida/ADBb0uiOqmUCsDM2MsYDEfSvFR29hlceTX2iJgqB6NSdm-yMbcCYNZwwpmFv04LJuQdOnO9RYxLGSim3NZpfphDHB_WCNk1dufJpCyYxl9W028uJrh67295HPq2pWXSvGYPSxf-nKr2A9JLR7EfHeIo1s27ZOPQj0l-03z0H9ohkrA_HbI4XSef4RdRPKvx1aeA8u5j4sob6ydmugHzpvy09Gwg7Y_41CBqKpDTXDWXTTEsrTmcP-pshVvTKrHMh27OrMETtxqrrSkAfj6s" alt="AsistApp Logo" className="w-24 h-24 object-contain rounded-2xl shadow-xl" />
+          </div>
+          <header className="flex flex-col gap-3 text-center">
+            <h2 className="font-display text-3xl font-bold text-on-surface">Bienvenido a AsistApp</h2>
+            <p className="text-on-surface-variant text-base">Ingrese para comenzar a gestionar su asistencia.</p>
+          </header>
+          
+          <div className="flex flex-col gap-4">
+            <input 
+              type="email" 
+              placeholder="Email" 
+              className="w-full px-5 py-4 bg-white border border-outline-variant rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input 
+              type="password" 
+              placeholder="Contraseña" 
+              className="w-full px-5 py-4 bg-white border border-outline-variant rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+            />
+            <button 
+              onClick={() => onLogin(email, pass)} 
+              className="w-full bg-primary text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:bg-primary-container transition-all"
+            >
+              Iniciar Sesión / Registrarse
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
-    <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-      <div className="w-full max-w-sm flex flex-col gap-8">
-        <div className="flex justify-center">
-           <img src="https://lh3.googleusercontent.com/aida/ADBb0uiOqmUCsDM2MsYDEfSvFR29hlceTX2iJgqB6NSdm-yMbcCYNZwwpmFv04LJuQdOnO9RYxLGSim3NZpfphDHB_WCNk1dufJpCyYxl9W028uJrh67295HPq2pWXSvGYPSxf-nKr2A9JLR7EfHeIo1s27ZOPQj0l-03z0H9ohkrA_HbI4XSef4RdRPKvx1aeA8u5j4sob6ydmugHzpvy09Gwg7Y_41CBqKpDTXDWXTTEsrTmcP-pshVvTKrHMh27OrMETtxqrrSkAfj6s" alt="AsistApp Logo" className="w-24 h-24 object-contain rounded-2xl shadow-xl" />
-        </div>
-        <header className="flex flex-col gap-3 text-center">
-          <h2 className="font-display text-3xl font-bold text-on-surface">Bienvenido a AsistApp</h2>
-          <p className="text-on-surface-variant text-base">Ingrese para comenzar a gestionar su asistencia.</p>
-        </header>
-        <button onClick={onLogin} className="w-full bg-primary text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:bg-primary-container transition-all">
-          Iniciar Sesión / Registrarse
-          <ArrowRight className="w-5 h-5" />
-        </button>
-      </div>
-    </main>
-  </div>
-);
+  );
+};
 
 const RegisterScreen = ({ onComplete }: { onComplete: (profile: Profile) => void }) => {
   const [formData, setFormData] = useState({ first_name: '', last_name: '', phone: '' });
@@ -591,31 +615,46 @@ export default function App() {
   // Load data from Supabase on mount
   useEffect(() => {
     const loadData = async () => {
+      console.log("Iniciando carga de datos desde Supabase...");
       try {
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: authData, error: authErr } = await supabase.auth.getUser();
+        
+        if (authErr) {
+          console.error("Error al obtener usuario:", authErr.message);
+          setIsLoading(false);
+          return;
+        }
+
+        const user = authData?.user;
+
         if (user) {
+          console.log("Usuario detectado:", user.email);
           // Fetch Profile
-          const { data: profData } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+          const { data: profData, error: profErr } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+          if (profErr) console.warn("No se encontró perfil para el usuario:", profErr.message);
           if (profData) setProfile(profData);
 
           // Fetch Courses
-          const { data: coursesData } = await supabase.from('courses').select('*').eq('teacher_id', user.id);
+          const { data: coursesData, error: coursesErr } = await supabase.from('courses').select('*').eq('teacher_id', user.id);
+          if (coursesErr) console.error("Error al cargar cursos:", coursesErr.message);
           if (coursesData) setCourses(coursesData);
 
           // Fetch Students for all courses
-          if (coursesData) {
+          if (coursesData && coursesData.length > 0) {
             const stsObj: Record<string, Student[]> = {};
             for (const course of coursesData) {
-              const { data: stsData } = await supabase.from('students').select('*').eq('course_id', course.id);
+              const { data: stsData, error: stsErr } = await supabase.from('students').select('*').eq('course_id', course.id);
+              if (stsErr) console.error(`Error al cargar alumnos del curso ${course.id}:`, stsErr.message);
               if (stsData) stsObj[course.id] = stsData;
             }
             setStudentsByCourse(stsObj);
           }
 
           // Fetch Subjects
-          const { data: subsData } = await supabase.from('subjects').select('*').eq('teacher_id', user.id);
+          const { data: subsData, error: subsErr } = await supabase.from('subjects').select('*').eq('teacher_id', user.id);
+          if (subsErr) console.error("Error al cargar asignaturas:", subsErr.message);
+          
           if (subsData) {
-            // Also need subject_courses mapping
             const subsWithCourses = [];
             for (const sub of subsData) {
               const { data: scData } = await supabase.from('subject_courses').select('course_id').eq('subject_id', sub.id);
@@ -628,7 +667,9 @@ export default function App() {
           }
 
           // Fetch Attendance History
-          const { data: attData } = await supabase.from('attendance').select('*');
+          const { data: attData, error: attErr } = await supabase.from('attendance').select('*');
+          if (attErr) console.error("Error al cargar historial de asistencia:", attErr.message);
+          
           if (attData) setAttendanceHistory(attData.map(a => ({
             studentId: a.student_id,
             courseId: a.course_id,
@@ -638,9 +679,11 @@ export default function App() {
           })));
 
           if (profData) setScreen('attendance');
+        } else {
+          console.log("No hay sesión activa de Supabase.");
         }
       } catch (error) {
-        console.error("Error loading data:", error);
+        console.error("Error crítico en la conexión con Supabase:", error);
       } finally {
         setIsLoading(false);
       }
@@ -770,17 +813,32 @@ export default function App() {
     };
   };
 
+  const handleLogin = async (email: string, pass: string) => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+      if (error) {
+        // Try sign up if login fails (for this demo simplicity)
+        const { data: upData, error: upErr } = await supabase.auth.signUp({ email, password: pass });
+        if (upErr) throw upErr;
+        alert("Cuenta creada. Por favor, completa tu perfil.");
+      } else {
+        // Success login, useEffect will trigger
+        window.location.reload(); // Refresh to trigger useEffect data load
+      }
+    } catch (e: any) {
+      alert("Error de autenticación: " + e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const renderScreen = () => {
     if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-surface font-display font-bold text-primary">Cargando AsistApp...</div>;
 
     switch (currentScreen) {
       case 'welcome': 
-        return <WelcomeScreen onLogin={async () => {
-          // For the sake of the demo, we try to auto-login or prompt
-          const { data: { user } } = await supabase.auth.getUser();
-          if (user) setScreen('attendance');
-          else setScreen('register');
-        }} />;
+        return <WelcomeScreen onLogin={(email, pass) => handleLogin(email, pass)} />;
       
       case 'register': 
         return <RegisterScreen onComplete={handleRegister} />;
