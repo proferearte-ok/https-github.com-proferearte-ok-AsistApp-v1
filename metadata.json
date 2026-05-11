@@ -1,0 +1,8 @@
+{
+  "name": "AsistApp v1",
+  "description": "A professional attendance management system for teachers with voice registration and course configuration.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
